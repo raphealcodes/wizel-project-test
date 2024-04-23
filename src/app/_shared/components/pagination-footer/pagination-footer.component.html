@@ -1,0 +1,78 @@
+<div class="relative">
+  <div
+    class="w-full bottom-0 bg-white shadow p-2 flex  md:flex md:justify-between lg:flex lg:justify-between items-center"
+  >
+    <div class="relative">
+      <span class="font-normal text-sm leading-17.5 text-[#3A3A3A]">Rows per page</span>
+      <button
+        (click)="handleToggle()"
+        class="text-xs border rounded-5 p-1 border-accent text-secondary relative z-1 ml-2 w-12"
+      >
+        {{ selectedItemsPerPage }}
+        <span class="text-secondary"><i class="ri-arrow-down-s-line"></i></span>
+      </button>
+      <!-- class="absolute top-5 left-0" -->
+      <div
+        *ngIf="dropdownOpen"
+        id="dropdown"
+        class="border z-60 w-12 absolute bottom-5 left-28 z-60 bg-[#F1F4F8] border-[#C6C6C6]"
+      >
+        <div
+          *ngFor="let item of itemsPerPageOptions"
+          (click)="updateItemsPerPage(item)"
+          class="hover:bg-primary hover:text-white cursor-pointer border-[#C6C6C6] p-2"
+        >
+          {{ item }}
+        </div>
+      </div>
+    </div>
+    <div class="md:flex items-center">
+      <div class="flex">
+        <button
+        (click)="previousSkipPage()"
+        class="w-8 h-8 border m-1 flex items-center justify-center cursor-pointer rounded-lg text-sm leading-17.5 text-secondary font-normal"
+      >
+        <span><i class="ri-skip-left-line"></i></span>
+      </button>
+        <button
+          (click)="previousPage()"
+          class="w-8 h-8 border m-1 flex items-center justify-center cursor-pointer rounded-lg text-sm leading-17.5 text-secondary font-normal"
+        >
+          <span><i class="ri-arrow-left-s-line"></i></span>
+        </button>
+
+        <div
+          *ngFor="let page of generateBoxesArray()"
+          class="w-8 h-8 border m-1 flex items-center justify-center cursor-pointer rounded-lg text-sm leading-17.5 text-secondary font-normal"
+          [class.bg-primary]="page === currentPage"
+          [class.text-white]="page === currentPage"
+          (click)="setCurrentPage(page)"
+        >
+          {{ page }}
+        </div>
+
+        <button
+          (click)="nextPage()"
+          class="w-8 h-8 border m-1 flex items-center justify-center cursor-pointer rounded-lg text-sm leading-17.5 text-secondary font-normal"
+        >
+          <span><i class="ri-arrow-right-s-line"></i></span>
+        </button>
+        <button
+        (click)="nextSkipPage()"
+        class="w-8 h-8 border m-1 flex items-center justify-center cursor-pointer rounded-lg text-sm leading-17.5 text-secondary font-normal"
+      >
+        <span><i class="ri-skip-right-line"></i></span>
+      </button>
+      </div>
+
+      <div>
+        <!-- <div class="">
+          {{ calculateStartIndex() }} - {{ calculateEndIndex() }}
+          <span class="text-[#adadae] text-sm"
+            >of {{ totalPages }} records</span
+          >
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
