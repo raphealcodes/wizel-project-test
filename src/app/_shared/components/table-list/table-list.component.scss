@@ -1,0 +1,56 @@
+// table customizations
+.mat-elevation-z8 {
+  overflow-x: auto;
+  // box-shadow: none;
+  border-radius: 5px !important;
+}
+
+::ng-deep.mdc-data-table__table,
+table {
+  border: none !important;
+  text-wrap: nowrap !important;
+  border-spacing: 0;
+  table-layout: fixed;
+  border-bottom: 1px solid var(--accent) !important;
+
+}
+
+::ng-deep.mat-mdc-cell,
+tr td {
+  border-bottom-color: var(--accent) !important;
+  border-bottom-width: var(--mat-table-row-item-outline-width, 1px);
+  border-bottom-style: solid;
+  letter-spacing: var(--mat-table-row-item-label-text-tracking);
+  line-height: inherit;
+}
+
+::ng-deep.mat-mdc-header-row,
+thead tr th {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  color: var(--accent-dark) !important;
+  line-height: 17.5px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  // height: 60px !important;
+  text-transform: uppercase !important;
+  font-family: "Lexend Deca" !important;
+}
+
+::ng-deep.mat-mdc-row,
+tr td {
+  height: 48px !important;
+  color: var(--secondary) !important;
+  line-height: 17.5px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  font-family: "Lexend Deca" !important;
+}
+
+.action {
+  &.edit {
+      i {
+        color: var(--yellow) !important;
+      }
+  }
+}

@@ -1,0 +1,77 @@
+<div class="mat-elevation-z8 px-0 shadow">
+  <table mat-table [dataSource]="tableDataSource" >
+    <ng-container
+      matColumnDef="{{ column['name'] }}"
+      *ngFor="let column of tableColumn"
+    >
+      <th mat-header-cell *matHeaderCellDef>
+        <div [ngSwitch]="column['type']">
+          <div *ngSwitchDefault>{{ column["title"] }}</div>
+        </div>
+      </th>
+      <mat-progress-bar
+        mode="indeterminate"
+        *ngIf="container['tableLoading']"
+      ></mat-progress-bar>
+      <td mat-cell *matCellDef="let element">
+        <div
+          [ngSwitch]="column['type']"
+        >
+          <div *ngSwitchDefault>{{ element[column["name"]] }}</div>
+          <div *ngSwitchCase="'longText'">
+            {{ element[column['name']] | slice:0:15 }}{{element[column['name']]?.length > 15 ? '...' : ''}}
+          </div>
+          <div *ngSwitchCase="'address'">
+            {{ element?.address?.suite }},{{ ' ' + element?.address?.street }} {{ element?.address?.city }}
+          </div>
+          <div *ngSwitchCase="'company'">
+            {{ element?.company?.name }}
+          </div>
+          <div
+            *ngSwitchCase="'action'"
+            (click)="$event.stopPropagation()"
+          >
+            <a
+            (click)="tableType === 'comments' ? editCommentTable(element) : editUserTable(element)"
+            matTooltip="Edit"
+            aria-label="Button that displays a tooltip when focused or hovered over"
+            class="action edit cursor-pointer"
+            >
+            <i class="ri-edit-circle-line"></i>
+            </a>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableColumnsToDisp"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: tableColumnsToDisp"
+      class="cursor-pointer"
+      (click)="tableType === 'comments' ? editCommentTable(row) : editUserTable(row)"
+    ></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td
+        class="mat-cell text-center py-3"
+        [attr.colspan]="tableColumn.length"
+      >
+        No {{tableType | titlecase}} data yet.
+      </td>
+    </tr>
+  </table>
+  <div *ngIf="container['tableLoading']" class="mat-spinner-container">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+
+  <!-- <mat-paginator [pageSizeOptions]="[7, 10, 20]" showFirstLastButtons aria-label="Select page of tasks"></mat-paginator> -->
+</div>
+<div fxLayout="row" fxLayoutAlign="start center">
+  <app-pagination-footer
+    [currentPage]="currentPage"
+    [totalPages]="totalItems"
+    (pageChange)="onPageChange($event)"
+    [selectedItemsPerPage]="itemsPerPage"
+    (selectedItems)="updateSelectedItemsPerPage($event)"
+  ></app-pagination-footer>
+</div>
