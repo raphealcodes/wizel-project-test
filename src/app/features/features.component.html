@@ -1,0 +1,94 @@
+<div class="main">
+  <mat-toolbar class="fixedElement" color="">
+    <div class="logo">
+      <a [routerLink]="['/']">
+        <img [src]="'/assets/images/wizer-logo.svg'" alt="Wizer Logo">
+      </a>
+    </div>
+    <div class="text-wrapper text-end">
+      <p class="text-sm font-normal leading-17.5">Welcome</p>
+      <h6 class="text-xl font-semibold leading-25">Anabanana</h6>
+    </div>
+
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav
+      #sidenav
+      fixedInViewport="true"
+      class="side-bar"
+      [mode]="sideNavMode"
+      [opened]="sideNavOpen"
+    >
+      <div class="side-bar-menu">
+        <div class="menu-section-bottom">
+          <nav>
+            <ul class="menu">
+              <li class="menu-item">
+                <a [routerLink]="['comments']" routerLinkActive="current">
+                  <span class="dash-menu-icon">
+                    <img
+                      class="active"
+                      src="/assets/icons/comment-active.svg"
+                      alt="Comment Icon"
+                      width="20"
+                      height="20"
+                    />
+                    <img
+                      class="inactive"
+                      src="/assets/icons/comment-inactive.svg"
+                      alt="Comment Icon"
+                      width="20"
+                      height="20"
+                    />
+                  </span>
+                  Comments</a
+                >
+                </li>
+
+                <li class="menu-item">
+                  <a [routerLink]="['users']" routerLinkActive="current">
+                    <span class="dash-menu-icon">
+                      <img
+                        class="active"
+                        src="/assets/icons/user-active.svg"
+                        alt="User Icon"
+                        width="20"
+                        height="20"
+                      />
+                      <img
+                        class="inactive"
+                        src="/assets/icons/user-inactive.svg"
+                        alt="User Icon"
+                        width="20"
+                        height="20"
+                      />
+                    </span>
+                    Users</a
+                  >
+                  </li>
+             </ul>
+
+          </nav>
+        </div>
+      </div>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="main-content relative pt-98 bg-white">
+      <div class="w-full h-72 flex justify-end pr-5">
+        <div class="self-center">
+          <button (click)="addNewEntry()" class="h-10 py-2.5 px-15 bg-primary rounded-5 text-white text-sm leading-15.5 flex items-center">
+            <i class="ri-add-circle-line text-lg leading-none mr-2"></i> New Entry
+          </button>
+        </div>
+      </div>
+
+      <div class="relative pr-5 pl-5 md:pl-0 lg:pl-0 pb-72 h-full">
+      <div class="main-router  bg-[#F5F5F5] rounded-5 p-2.5">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+</div>

@@ -1,0 +1,2 @@
+<app-table-list *ngIf="!container['loading']" [tableColumn]="commentColumn" [tableType]="tableType"></app-table-list>
+<app-loader *ngIf="container['loading']"></app-loader>

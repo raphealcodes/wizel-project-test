@@ -1,0 +1,101 @@
+
+<div class="px-5">
+  <div class="flex justify-end mt-2">
+    <button class="close-button" [mat-dialog-close]="false">
+      <i class="ri-close-line text-2xl"></i>
+    </button>
+  </div>
+
+  <div class="mb-5">
+    <div class="header-text-content">
+      <h2 class="m-0 text-center font-semibold text-lg leading-22.5">{{data.id ? 'Entry Details' :'Add Entry'}}</h2>
+    </div>
+
+      <form class="w-full mt-6" [formGroup]="commentForm">
+          <div class="form-group">
+            <label
+              class="form-label required"
+              for="name"
+            >
+              Name
+            </label>
+            <mat-form-field appearance="outline" class="w-full mt-1.5">
+              <input
+                matInput
+                id="title"
+                type="text"
+                placeholder="Enter Name"
+                formControlName="name"
+                (input)="controlChanged('name')"
+              />
+            </mat-form-field>
+            <div class="error-wrapper">
+              <span class="error" *ngIf="uiErrors.name != ''">{{
+                uiErrors.name
+              }}</span>
+            </div>
+          </div>
+          <div class="form-group mt-6">
+            <label
+              class="form-label required"
+              for="email"
+            >
+              Email
+            </label>
+            <mat-form-field appearance="outline" class="w-full mt-1.5">
+              <input
+                matInput
+                id="title"
+                type="email"
+                placeholder="Enter email"
+                formControlName="email"
+                (input)="controlChanged('email')"
+              />
+            </mat-form-field>
+            <div class="error-wrapper">
+              <span class="error" *ngIf="uiErrors.email != ''">{{
+                uiErrors.email
+              }}</span>
+            </div>
+          </div>
+          <div class="form-group mt-6">
+            <label
+              class="form-label required"
+              for="body"
+            >
+             Body
+            </label>
+            <mat-form-field appearance="outline" class="w-full textarea mt-1.5">
+              <textarea
+              cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="3"
+              cdkAutosizeMaxRows="3"
+                matInput
+                id="body"
+                type="text"
+                placeholder="Enter ticket details"
+                formControlName="body"
+                (input)="controlChanged('body')"
+              ></textarea>
+            </mat-form-field>
+            <div class="error-wrapper">
+              <span class="error" *ngIf="uiErrors.body != ''">{{
+                uiErrors.body
+              }}</span>
+            </div>
+          </div>
+        <div class="button-wrapper flex justify-end mt-8">
+          <button
+            type="submit"
+            class="w-full bg-primary text-white rounded-5 h-45 font-normal leading-17.5 text-sm"
+            [disabled]="submitting"
+            (click)=" onSubmit()"
+          >
+          <span class="flex justify-center items-center">
+             <span *ngIf="!submitting">{{data.id ? 'Update Entry' :'Add Entry'}}</span>
+            <app-loader2 *ngIf="submitting"></app-loader2>
+          </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

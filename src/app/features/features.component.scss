@@ -1,0 +1,102 @@
+.fixedElement {
+  position: fixed;
+  z-index: 10;
+  height: 98px;
+  background-color: #FFFFFF !important;
+  border: 1px solid #E8EDF2;
+  padding: 25px 20px !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+mat-sidenav {
+  position: fixed;
+  padding-top: 170px;
+}
+
+
+
+// side bar customizations
+mat-sidenav-container {
+  position: relative;
+
+  mat-sidenav.side-bar {
+    width: 200px;
+    background: var(--white);
+    border-right: none;
+
+    .side-bar-menu {
+      .menu-section-bottom {
+        .menu {
+          margin: 0px 20px 100px;
+          padding: 0px;
+
+          &-item {
+            position: relative;
+            list-style: none !important;
+            width: 100%;
+            margin-bottom: 15px;
+
+
+            a {
+              height: 50px;
+              padding: 0px 32px 0px 20px !important;
+              width: 100%;
+              font-weight: 400;
+              text-decoration: none;
+              position: relative;
+              cursor: pointer;
+              display: flex;
+              align-items: center;
+              color: var(--secondary) !important;
+              font-size: 14px;
+              line-height: 17.5px;
+              text-decoration: none !important;
+              transition: color 0.4s ease-out !important;
+
+              span.dash-menu-icon {
+                display: inline-block;
+                margin-right: 13px;
+
+                img {
+                  &.active {
+                    display: none;
+                  }
+
+                  &.inactive {
+                    display: inline-block;
+                  }
+                }
+
+                > span {
+                  margin-right: 5px;
+                }
+              }
+
+              &.current {
+                border-radius: 5px;
+                background: var(--primary);
+                color: var(--white) !important;
+
+                span.dash-menu-icon {
+                  img {
+                    &.active {
+                      display: inline-block;
+                      transition: color 0.4s ease-out !important;
+                    }
+
+                    &.inactive {
+                      display: none;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// side bar customizations
