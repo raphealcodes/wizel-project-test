@@ -1,1 +1,211 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use "@angular/material" as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$wizel-project-test-primary: mat.define-palette(mat.$indigo-palette);
+$wizel-project-test-accent: mat.define-palette(
+  mat.$pink-palette,
+  A200,
+  A100,
+  A400
+);
+
+// The warn palette is optional (defaults to red).
+$wizel-project-test-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$wizel-project-test-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $wizel-project-test-primary,
+      accent: $wizel-project-test-accent,
+      warn: $wizel-project-test-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($wizel-project-test-theme);
+
 /* You can add global styles to this file, and also import other style files */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #8158f3;
+  --secondary: #121212;
+  --accent: #e5e5e5;
+  --accent-dark: #7F7F7F;
+  --white: #fff;
+  --black: #000;
+  --red: red;
+  --green: green;
+  --yellow : #efb42e;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Lexend Deca", "Helvetica Neue", sans-serif;
+}
+
+@layer base {
+  img, video {
+    max-width: initial;
+    height: initial;
+  }
+}
+
+.form-label {
+  @apply text-sm font-normal leading-17.5;
+}
+
+
+// customize the mat-form-field
+
+.mdc-notched-outline__leading {
+  border-color: transparent !important;
+}
+
+.mdc-notched-outline__notch {
+  border-color: transparent !important;
+}
+
+.mdc-notched-outline__trailing {
+  border-color: transparent !important;
+}
+
+.mat-mdc-text-field-wrapper {
+  width: 100% !important;
+  background: #f1f1f1 !important;
+  height: 45px !important;
+}
+
+.mdc-text-field {
+  border-top-left-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+  border-bottom-left-radius: 5px !important;
+  display: inline-flex !important;
+  align-items: baseline !important;
+  padding: 0 16px !important;
+  position: relative !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+  will-change: opacity, transform, color !important;
+}
+
+.mat-mdc-form-field-flex {
+  display: inline-flex !important;
+  align-items: baseline !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  height: 45px !important;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+
+.mat-mdc-form-field-infix {
+  min-height: 0 !important;
+}
+
+.textarea {
+  height: 115px;
+  width: 100%;
+}
+
+.mdc-text-field--focused .mdc-notched-outline > * {
+  border-color: var(--primary) !important;
+  border-width: 1px !important;
+}
+
+
+.error-wrapper {
+  margin-top: -25px !important;
+}
+
+.error {
+  color: var(--red) !important;
+  font-size: 12px !important;
+}
+
+.form-group .required:after {
+  content: " *";
+    color: var(--red);
+    font-weight: 400;
+}
+
+// customize the mat-form-field
+
+
+// snackbar
+.snack-bar {
+  font-size: 24px;
+
+}
+
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+  border-radius: 12px !important;
+  height: 56px !important;
+  padding: 0px 16px !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+}
+
+.mdc-snackbar__label {
+  padding-left: 0 !important;
+  // width: 100%;
+  flex-grow: 1;
+  box-sizing: border-box;
+  margin: 0;
+  visibility: hidden;
+  padding-top: 14px;
+  padding-bottom: 14px;
+
+  color: var(--white);
+  font-size: 14px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  line-height: 20px !important; /* 142.857% */
+  letter-spacing: 0.035px !important;
+}
+
+
+.mat-mdc-snack-bar-container {
+  width: fit-content !important;
+  &.error {
+    --mdc-snackbar-container-color: var(--red) !important;
+    --mat-mdc-snack-bar-button-color: var(--white);
+    --mdc-snackbar-supporting-text-color: var(--white);
+  }
+
+  &.success {
+    --mdc-snackbar-container-color: var(--green) !important;
+    --mat-mdc-snack-bar-button-color: var(--white);
+    --mdc-snackbar-supporting-text-color: var(--white);
+  }
+}
+// snackbar
