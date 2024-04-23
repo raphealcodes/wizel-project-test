@@ -1,0 +1,371 @@
+
+<div class="px-5">
+  <div class="flex justify-end mt-2">
+    <button class="close-button" [mat-dialog-close]="false">
+      <i class="ri-close-line text-2xl"></i>
+    </button>
+  </div>
+
+  <div class="mb-5">
+    <div class="header-text-content">
+      <h2 class="m-0 text-center font-semibold text-lg leading-22.5">{{data.id ? 'Entry Details' :'Add Entry'}}</h2>
+    </div>
+
+      <form class="w-full mt-6" [formGroup]="userForm">
+          <div class="form-group">
+            <label
+              class="form-label required"
+              for="name"
+            >
+              Name
+            </label>
+            <mat-form-field appearance="outline" class="w-full mt-1.5">
+              <input
+                matInput
+                id="name"
+                type="text"
+                placeholder="Enter Name"
+                formControlName="name"
+                (input)="controlChanged('name')"
+              />
+            </mat-form-field>
+            <div class="error-wrapper">
+              <span class="error" *ngIf="uiErrors.name != ''">{{
+                uiErrors.name
+              }}</span>
+            </div>
+          </div>
+          <div class="form-group mt-6">
+            <label
+              class="form-label required"
+              for="name"
+            >
+              Username
+            </label>
+            <mat-form-field appearance="outline" class="w-full mt-1.5">
+              <input
+                matInput
+                id="username"
+                type="text"
+                placeholder="Enter username"
+                formControlName="username"
+                (input)="controlChanged('username')"
+              />
+            </mat-form-field>
+            <div class="error-wrapper">
+              <span class="error" *ngIf="uiErrors.username != ''">{{
+                uiErrors.username
+              }}</span>
+            </div>
+          </div>
+          <div class="form-group mt-6">
+            <label
+              class="form-label required"
+              for="email"
+            >
+              Email
+            </label>
+            <mat-form-field appearance="outline" class="w-full mt-1.5">
+              <input
+                matInput
+                id="email"
+                type="email"
+                placeholder="Enter email"
+                formControlName="email"
+                (input)="controlChanged('email')"
+              />
+            </mat-form-field>
+            <div class="error-wrapper">
+              <span class="error" *ngIf="uiErrors.email != ''">{{
+                uiErrors.email
+              }}</span>
+            </div>
+          </div>
+
+          <div class="form-group mt-12">
+            <h4 class="text-sm leading-17.5 font-semibold">Address</h4>
+            </div>
+
+            <div class="form-group mt-3">
+              <label
+                class="form-label required"
+                for="street"
+              >
+                Street
+              </label>
+              <mat-form-field appearance="outline" class="w-full mt-1.5">
+                <input
+                  matInput
+                  id="street"
+                  type="text"
+                  placeholder="Enter street"
+                  formControlName="street"
+                  (input)="controlChanged('street')"
+                />
+              </mat-form-field>
+              <div class="error-wrapper">
+                <span class="error" *ngIf="uiErrors.street != ''">{{
+                  uiErrors.street
+                }}</span>
+              </div>
+            </div>
+
+            <div class="form-group mt-6">
+              <label
+                class="form-label required"
+                for="suite"
+              >
+              Suite
+              </label>
+              <mat-form-field appearance="outline" class="w-full mt-1.5">
+                <input
+                  matInput
+                  id="suite"
+                  type="text"
+                  placeholder="Enter suite"
+                  formControlName="suite"
+                  (input)="controlChanged('suite')"
+                />
+              </mat-form-field>
+              <div class="error-wrapper">
+                <span class="error" *ngIf="uiErrors.suite != ''">{{
+                  uiErrors.suite
+                }}</span>
+              </div>
+            </div>
+
+            <div class="form-group mt-6">
+              <label
+                class="form-label required"
+                for="city"
+              >
+             City
+              </label>
+              <mat-form-field appearance="outline" class="w-full mt-1.5">
+                <input
+                  matInput
+                  id="city"
+                  type="text"
+                  placeholder="Enter city"
+                  formControlName="city"
+                  (input)="controlChanged('city')"
+                />
+              </mat-form-field>
+              <div class="error-wrapper">
+                <span class="error" *ngIf="uiErrors.city != ''">{{
+                  uiErrors.city
+                }}</span>
+              </div>
+            </div>
+
+            <div class="form-group mt-6">
+              <label
+                class="form-label"
+                for="zipcode"
+              >
+             Zip Code
+              </label>
+              <mat-form-field appearance="outline" class="w-full mt-1.5">
+                <input
+                  matInput
+                  id="zipcode"
+                  type="text"
+                  placeholder="Enter zip code"
+                  formControlName="zipcode"
+                  (input)="controlChanged('zipcode')"
+                />
+              </mat-form-field>
+              <div class="error-wrapper">
+                <span class="error" *ngIf="uiErrors.zipcode != ''">{{
+                  uiErrors.zipcode
+                }}</span>
+              </div>
+            </div>
+
+            <div class="form-group mt-6">
+              <label
+                class="form-label"
+                for="geo"
+              >
+             Geo
+              </label>
+              <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+                <div>
+                  <mat-form-field appearance="outline" class="w-full mt-1.5">
+                    <input
+                      matInput
+                      id="lat"
+                      type="text"
+                      placeholder="Latitude"
+                      formControlName="lat"
+                      (input)="controlChanged('lat')"
+                    />
+                  </mat-form-field>
+                  <div class="error-wrapper">
+                    <span class="error" *ngIf="uiErrors.lat != ''">{{
+                      uiErrors.lat
+                    }}</span>
+                  </div>
+                </div>
+                <div>
+                  <mat-form-field appearance="outline" class="w-full mt-1.5">
+                    <input
+                      matInput
+                      id="lng"
+                      type="text"
+                      placeholder="Longitude"
+                      formControlName="lng"
+                      (input)="controlChanged('lng')"
+                    />
+                  </mat-form-field>
+                  <div class="error-wrapper">
+                    <span class="error" *ngIf="uiErrors.lng != ''">{{
+                      uiErrors.lng
+                    }}</span>
+                  </div>
+                </div>
+                </div>
+
+
+            </div>
+
+            <div class="form-group mt-6">
+              <label
+                class="form-label required"
+                for="phone"
+              >
+              Phone
+              </label>
+              <mat-form-field appearance="outline" class="w-full mt-1.5">
+                <input
+                  matInput
+                  id="phone"
+                  type="text"
+                  placeholder="Enter phone"
+                  formControlName="phone"
+                  (input)="controlChanged('phone')"
+                />
+              </mat-form-field>
+              <div class="error-wrapper">
+                <span class="error" *ngIf="uiErrors.phone != ''">{{
+                  uiErrors.phone
+                }}</span>
+              </div>
+            </div>
+
+            <div class="form-group mt-6">
+              <label
+                class="form-label required"
+                for="website"
+              >
+              Website
+              </label>
+              <mat-form-field appearance="outline" class="w-full mt-1.5">
+                <input
+                  matInput
+                  id="website"
+                  type="text"
+                  placeholder="Enter website"
+                  formControlName="website"
+                  (input)="controlChanged('website')"
+                />
+              </mat-form-field>
+              <div class="error-wrapper">
+                <span class="error" *ngIf="uiErrors.website != ''">{{
+                  uiErrors.website
+                }}</span>
+              </div>
+            </div>
+
+            <div class="form-group mt-12">
+              <h4 class="text-sm leading-17.5 font-semibold">Company</h4>
+              </div>
+              <div class="form-group mt-6">
+                <label
+                  class="form-label required"
+                  for="companyName"
+                >
+                Name
+                </label>
+                <mat-form-field appearance="outline" class="w-full mt-1.5">
+                  <input
+                    matInput
+                    id="companyName"
+                    type="text"
+                    placeholder="Enter name"
+                    formControlName="companyName"
+                    (input)="controlChanged('companyName')"
+                  />
+                </mat-form-field>
+                <div class="error-wrapper">
+                  <span class="error" *ngIf="uiErrors.companyName != ''">{{
+                    uiErrors.companyName
+                  }}</span>
+                </div>
+              </div>
+
+              <div class="form-group mt-6">
+                <label
+                  class="form-label"
+                  for="catchphrase"
+                >
+                Catchphrase
+                </label>
+                <mat-form-field appearance="outline" class="w-full mt-1.5">
+                  <input
+                    matInput
+                    id="catchphrase"
+                    type="text"
+                    placeholder="Enter catchphrase"
+                    formControlName="catchphrase"
+                    (input)="controlChanged('catchphrase')"
+                  />
+                </mat-form-field>
+                <div class="error-wrapper">
+                  <span class="error" *ngIf="uiErrors.catchphrase != ''">{{
+                    uiErrors.catchphrase
+                  }}</span>
+                </div>
+              </div>
+
+              <div class="form-group mt-6">
+                <label
+                  class="form-label"
+                  for="bs"
+                >
+                BS
+                </label>
+                <mat-form-field appearance="outline" class="w-full mt-1.5">
+                  <input
+                    matInput
+                    id="bs"
+                    type="text"
+                    placeholder="Title"
+                    formControlName="bs"
+                    (input)="controlChanged('bs')"
+                  />
+                </mat-form-field>
+                <div class="error-wrapper">
+                  <span class="error" *ngIf="uiErrors.bs != ''">{{
+                    uiErrors.bs
+                  }}</span>
+                </div>
+              </div>
+
+
+        <div class="button-wrapper flex justify-end mt-8">
+          <button
+            type="submit"
+            class="w-full bg-primary text-white rounded-5 h-45 font-normal leading-17.5 text-sm"
+            [disabled]="submitting"
+            (click)=" onSubmit()"
+          >
+          <span class="flex justify-center items-center">
+             <span *ngIf="!submitting">{{data.id ? 'Update Entry' :'Add Entry'}}</span>
+            <app-loader2 *ngIf="submitting"></app-loader2>
+          </span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
