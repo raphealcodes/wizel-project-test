@@ -1,27 +1,39 @@
-# WizelProjectTest
+# Wizel Project Test
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.2.
 
-## Development server
+# How to run 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# clone the project first
+git clone 'Project Link'
 
-## Code scaffolding
+# install the packages
+npm install 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# run the app
+ng serve
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+# Library Used:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Tailwind,
+Angular Material
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+I used modular design pattern to allow lazy loading of the features,
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+I created a shared module to handle all my reusable components which consists of:
+
+1: components folder: this handles all reuseable component e.g table list
+3: models folder: this handles all the interface of data
+4: services folder: this handles all my validation of the form
+5: third party folder: this is where i called my angular material lib
+6: dialogs folder: this is where the create user and create comment dialog can be found
+
+
+Features modules is the main module i used, and holds the users modules and comments modules
+
+
+I used rxjs (observables) to hold the data and pass across different component, since the api server don't persist data, instead of using local storage to hold the data, also use it to append to the existing data or update the existing data
