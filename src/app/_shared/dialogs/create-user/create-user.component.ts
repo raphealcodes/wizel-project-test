@@ -12,11 +12,9 @@ import {
 } from '@angular/material/dialog';
 import { CommonService } from '@app/_shared/services/common.service';
 import { FormErrors, ValidationMessages } from './create-user.validators';
-import { Subscription, of, take } from 'rxjs';
-import { ApplicationContextService } from '@app/_shared/services/application-context.service';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '@environments/environment';
+import { of, take } from 'rxjs';
 import { Address, Company, Geo, UserDTO } from '@app/_shared/models/users-interface';
+import { UserService } from '@app/_shared/services/user.service';
 
 @Component({
   selector: 'app-create-user',
@@ -41,7 +39,7 @@ export class CreateUserComponent implements OnInit {
     private fb: FormBuilder,
     private commonServices: CommonService,
     public _dialogRef: MatDialogRef<CreateUserComponent>,
-    private http: HttpClient
+    private userService: UserService
   ) {}
 
   ngOnInit() {
@@ -139,8 +137,7 @@ export class CreateUserComponent implements OnInit {
 
     if (this.data.id) {
       fd.id = this.data.id;
-      this.http
-      .put<UserDTO>(`${environment.BASE_URL}/users/${this.data.id}`, fd)
+      this.userService.updateUser(fd)
       .pipe(take(1))
       .subscribe(
         (response: UserDTO) => {
@@ -162,8 +159,7 @@ export class CreateUserComponent implements OnInit {
         }
       );
     } else {
-      this.http
-        .post<UserDTO>(`${environment.BASE_URL}/users`, fd)
+      this.userService.createUser(fd)
         .pipe(take(1))
         .subscribe(
           (response: UserDTO) => {

@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserDTO } from '@app/_shared/models/users-interface';
 import { ApplicationContextService } from '@app/_shared/services/application-context.service';
 import { UserService } from '@app/_shared/services/user.service';
-import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-view-users',
