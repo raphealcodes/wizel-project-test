@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserDTO } from '@app/_shared/models/users-interface';
 import { ApplicationContextService } from '@app/_shared/services/application-context.service';
+import { UserService } from '@app/_shared/services/user.service';
 import { environment } from '@environments/environment';
 
 @Component({
   selector: 'app-view-users',
   templateUrl: './view-users.component.html',
-  styleUrls: ['./view-users.component.scss']
+  styleUrls: ['./view-users.component.scss'],
 })
 export class ViewUsersComponent implements OnInit {
   userColumn: any = [
@@ -22,17 +23,21 @@ export class ViewUsersComponent implements OnInit {
   ];
   tableType: string = 'users';
   container: any = {
-    loading: false
+    loading: false,
   };
   constructor(
     private appContext: ApplicationContextService,
-    private http: HttpClient
+    private userService: UserService
   ) {}
 
   ngOnInit() {
+    this.geUserData();
+  }
+
+  geUserData(): void {
     this.container['loading'] = true;
-    this.http.get<any>(environment.BASE_URL + '/users').subscribe({
-      next: (response: UserDTO) => {
+    this.userService.getUsers().subscribe({
+      next: (response: UserDTO[]) => {
         if (response) {
           this.appContext.userData$.next(response);
           this.container['loading'] = false;
@@ -41,5 +46,4 @@ export class ViewUsersComponent implements OnInit {
       error: () => {},
     });
   }
-
 }

@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { ViewUsersComponent } from './view-users.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { SharedModule } from '@app/_shared/shared.module';
 
 describe('ViewUsersComponent', () => {
   let component: ViewUsersComponent;
@@ -11,7 +13,8 @@ describe('ViewUsersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewUsersComponent ]
+      declarations: [ ViewUsersComponent ],
+      imports: [SharedModule, HttpClientModule]
     })
     .compileComponents();
   }));

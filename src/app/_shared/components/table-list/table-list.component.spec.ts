@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { TableListComponent } from './table-list.component';
+import { PaginationFooterComponent } from '../pagination-footer/pagination-footer.component';
+import { SharedModule } from '@app/_shared/shared.module';
 
 describe('TableListComponent', () => {
   let component: TableListComponent;
@@ -11,7 +13,8 @@ describe('TableListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TableListComponent ]
+      declarations: [ TableListComponent, PaginationFooterComponent ],
+      imports: [SharedModule]
     })
     .compileComponents();
   }));

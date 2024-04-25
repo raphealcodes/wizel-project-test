@@ -17,7 +17,7 @@ export class PaginationFooterComponent {
   @Input() totalPages: number = 50;
   dropdownOpen: boolean = false;
   @Output() pageChange = new EventEmitter<number>();
-  itemsPerPageOptions: number[] = [20, 50, 100];
+  itemsPerPageOptions: number[] = [7, 20, 50];
   @Input() selectedItemsPerPage: number = 10;
   @Output() selectedItems = new EventEmitter<number>();
   numberBoxes: any;

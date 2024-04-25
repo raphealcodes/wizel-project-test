@@ -4,6 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { SnackBarComponent } from './snack-bar.component';
+import { MAT_SNACK_BAR_DATA, MatSnackBar, MatSnackBarRef } from '@angular/material/snack-bar';
+import { SharedModule } from '@app/_shared/shared.module';
 
 describe('SnackBarComponent', () => {
   let component: SnackBarComponent;
@@ -11,7 +13,15 @@ describe('SnackBarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SnackBarComponent ]
+      declarations: [ SnackBarComponent ],
+      imports: [SharedModule],
+      providers: [{
+        provide: MatSnackBarRef,
+        useValue: {}
+        }, {
+        provide: MAT_SNACK_BAR_DATA,
+        useValue: {}
+        }]
     })
     .compileComponents();
   }));

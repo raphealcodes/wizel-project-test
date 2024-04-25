@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { CommentDTO } from '@app/_shared/models/comments-interface';
 import { ApplicationContextService } from '@app/_shared/services/application-context.service';
-import { CommonService } from '@app/_shared/services/common.service';
+import { CommentService } from '@app/_shared/services/comment.service';
 import { environment } from '@environments/environment';
 
 @Component({
@@ -21,16 +21,23 @@ export class ViewCommentsComponent implements OnInit {
   container: any = {
     loading: false
   };
+  commentData: CommentDTO[] = [];
   constructor(
     private appContext: ApplicationContextService,
-    private http: HttpClient
+    private commentService: CommentService
   ) {}
 
   ngOnInit() {
+     this.getCommentData();
+  }
+
+
+  getCommentData(): void {
     this.container['loading'] = true;
-    this.http.get<CommentDTO>(environment.BASE_URL + '/comments').subscribe({
-      next: (response: CommentDTO) => {
+    this.commentService.getComments().subscribe({
+      next: (response: CommentDTO[]) => {
         if (response) {
+          this.commentData = response;
           this.appContext.commentData$.next(response);
           this.container['loading'] = false;
         }
@@ -38,4 +45,5 @@ export class ViewCommentsComponent implements OnInit {
       error: () => {},
     });
   }
+
 }

@@ -14,9 +14,7 @@ import { CommonService } from '@app/_shared/services/common.service';
 import { FormErrors, ValidationMessages } from './create-comment.validators';
 import { Subscription, of, take } from 'rxjs';
 import { CommentDTO } from '@app/_shared/models/comments-interface';
-import { ApplicationContextService } from '@app/_shared/services/application-context.service';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '@environments/environment';
+import { CommentService } from '@app/_shared/services/comment.service';
 
 @Component({
   selector: 'app-create-comment',
@@ -41,12 +39,10 @@ export class CreateCommentComponent implements OnInit {
     private fb: FormBuilder,
     private commonServices: CommonService,
     public _dialogRef: MatDialogRef<CreateCommentComponent>,
-    private http: HttpClient
+    private commentService: CommentService
   ) {}
 
   ngOnInit() {
-
-
     const commentData: CommentDTO = this.data ? this.data : of({});
     this.populateForm(commentData);
   }
@@ -96,11 +92,11 @@ export class CreateCommentComponent implements OnInit {
       return;
     }
     const fd = JSON.parse(JSON.stringify(this.commentForm.value));
+    // let name = fd.name
     fd.postId = 10;
     if (this.data.id) {
       fd.id = this.data.id;
-      this.http
-      .put<CommentDTO>(`${environment.BASE_URL}/comments/${this.data.id}`, fd)
+     this.commentService.updateComment(fd)
       .pipe(take(1))
       .subscribe(
         (response: CommentDTO) => {
@@ -122,8 +118,7 @@ export class CreateCommentComponent implements OnInit {
         }
       );
     } else {
-      this.http
-        .post<CommentDTO>(`${environment.BASE_URL}/comments`, fd)
+      this.commentService.createComment(fd)
         .pipe(take(1))
         .subscribe(
           (response: CommentDTO) => {
