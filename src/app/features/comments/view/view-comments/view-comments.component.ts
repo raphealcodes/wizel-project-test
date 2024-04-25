@@ -18,7 +18,9 @@ export class ViewCommentsComponent implements OnInit {
     { name: 'action', title: '', type: 'action' },
   ];
   tableType: string = 'comments';
-  container: any = {};
+  container: any = {
+    loading: false
+  };
   constructor(
     private appContext: ApplicationContextService,
     private http: HttpClient
@@ -28,9 +30,9 @@ export class ViewCommentsComponent implements OnInit {
     this.container['loading'] = true;
     this.http.get<CommentDTO>(environment.BASE_URL + '/comments').subscribe({
       next: (response: CommentDTO) => {
-        this.container['loading'] = false;
         if (response) {
           this.appContext.commentData$.next(response);
+          this.container['loading'] = false;
         }
       },
       error: () => {},

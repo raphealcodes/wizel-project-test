@@ -21,7 +21,9 @@ export class ViewUsersComponent implements OnInit {
     { name: 'action', title: '', type: 'action' },
   ];
   tableType: string = 'users';
-  container: any = {};
+  container: any = {
+    loading: false
+  };
   constructor(
     private appContext: ApplicationContextService,
     private http: HttpClient
@@ -31,9 +33,9 @@ export class ViewUsersComponent implements OnInit {
     this.container['loading'] = true;
     this.http.get<any>(environment.BASE_URL + '/users').subscribe({
       next: (response: UserDTO) => {
-        this.container['loading'] = false;
         if (response) {
           this.appContext.userData$.next(response);
+          this.container['loading'] = false;
         }
       },
       error: () => {},

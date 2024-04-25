@@ -20,6 +20,7 @@ export class PaginationFooterComponent {
   itemsPerPageOptions: number[] = [20, 50, 100];
   @Input() selectedItemsPerPage: number = 10;
   @Output() selectedItems = new EventEmitter<number>();
+  numberBoxes: any;
 
   constructor(private elementRef: ElementRef) {}
 
@@ -65,10 +66,50 @@ export class PaginationFooterComponent {
     return Math.ceil(this.totalPages / this.selectedItemsPerPage);
   }
 
-  generateBoxesArray(): number[] {
+  generateBoxesArray(): any {
     const numBoxes = this.calculateNumBoxes();
-    return Array.from({ length: numBoxes }, (_, index) => index + 1);
+    const newNumBoxes = this.pagination(this.currentPage, numBoxes);
+    return newNumBoxes;
+    // return Array.from({ length: numBoxes }, (_, index) => index + 1);
   }
+
+
+  pagination(c: any, m: any) {
+    var numberOfPageShown;
+    let browserWidth = window?.innerWidth;
+    if (browserWidth < 991) {
+      numberOfPageShown = 0;
+    } else {
+      numberOfPageShown = 1;
+    }
+    var currentPage = c,
+      lastPage = m,
+      leftSide = currentPage - numberOfPageShown,
+      rightSide = currentPage + numberOfPageShown + 1,
+      range = [],
+      rangeWithDots = [],
+      l;
+
+    for (let i = 1; i <= lastPage; i++) {
+      if (i == 1 || i == lastPage || (i >= leftSide && i < rightSide)) {
+        range.push(i);
+      }
+    }
+
+    for (let i of range) {
+      if (l) {
+        if (i - l === 2) {
+          rangeWithDots.push(l + 1);
+        } else if (i - l !== 1) {
+          rangeWithDots.push('...');
+        }
+      }
+      rangeWithDots.push(i);
+      l = i;
+    }
+    return rangeWithDots;
+  }
+
   setCurrentPage(pageNumber: number) {
     this.currentPage = pageNumber;
     this.onPageChange(pageNumber);
@@ -90,13 +131,13 @@ export class PaginationFooterComponent {
 
   nextSkipPage() {
     const numPages = this.calculateNumBoxes();
-      this.currentPage = numPages;
-      this.onPageChange(this.currentPage);
+    this.currentPage = numPages;
+    this.onPageChange(this.currentPage);
   }
 
   previousSkipPage() {
-      this.currentPage = 1;
-      this.onPageChange(this.currentPage);
+    this.currentPage = 1;
+    this.onPageChange(this.currentPage);
   }
 
   calculateStartIndex(): number {

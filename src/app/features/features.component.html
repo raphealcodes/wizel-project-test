@@ -1,10 +1,10 @@
 <div class="main">
   <mat-toolbar class="fixedElement" color="">
     <div class="logo flex items-center ">
-      <div class="md:hidden lg:hidden">
+      <div class="md:hidden lg:hidden" *ngIf="sidenav">
         <button mat-icon-button (click)="sidenav.toggle()" class="sidemenu-toggle ">
-          <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
-          <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+          <mat-icon *ngIf="sidenav?.opened === false">menu</mat-icon>
+          <mat-icon *ngIf="sidenav?.opened === true">close</mat-icon>
         </button>
       </div>
       <a [routerLink]="['/']">

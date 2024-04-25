@@ -13,8 +13,8 @@ import { Observable, Subscription, debounceTime, fromEvent } from 'rxjs';
   templateUrl: './features.component.html',
   styleUrls: ['./features.component.scss'],
 })
-export class FeaturesComponent implements OnInit, OnDestroy {
-  @ViewChild('sidenav') sidenav: any;
+export class FeaturesComponent implements OnInit,  OnDestroy {
+  @ViewChild('sidenav') sidenav: any | boolean;
 
   sideNavMode: any = 'side';
   sideNavOpen = true;
@@ -34,9 +34,6 @@ export class FeaturesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.setupSideBar();
-    this.sidenavFunction();
-
     this.commentSubscription$ = this.appContext.commentData$.subscribe(
       (commentData: any) => {
         this.commentsData = commentData;
@@ -48,7 +45,11 @@ export class FeaturesComponent implements OnInit, OnDestroy {
         this.usersData = userData;
       }
     );
+
+    this.setupSideBar();
+    this.sidenavFunction();
   }
+
 
   addNewEntry() {
     const url: any = this.router.url.split('/')[2];
@@ -103,14 +104,14 @@ export class FeaturesComponent implements OnInit, OnDestroy {
     let sidenavClick$ = fromEvent(button, 'click');
 
     this.sidenavClickSubscription$ = sidenavClick$.subscribe((evt) => {
-      if (window.innerWidth < 991) {
+      if (window?.innerWidth < 991) {
         this.sidenav.close();
       }
     });
   }
 
   sidenavFunction() {
-    let browserWidth = window.innerWidth;
+    let browserWidth = window?.innerWidth;
     if (browserWidth < 991) {
       this.sideNavMode = 'over';
       this.sideNavOpen = false;
@@ -122,7 +123,8 @@ export class FeaturesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.sidenavSubscription$) this.sidenavSubscription$.unsubscribe();
-    if (this.sidenavClickSubscription$)
-      this.sidenavClickSubscription$.unsubscribe();
+    if (this.sidenavClickSubscription$) this.sidenavClickSubscription$.unsubscribe();
+    this.commentSubscription$.unsubscribe();
+    this.userSubscription$.unsubscribe();
   }
 }
